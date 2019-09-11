@@ -1,0 +1,24 @@
+<title>🌊 why i migrated to google app engine</title>
+<style>body{font-size:0.95rem;font-family:Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;}h5{margin-top:5px;margin-bottom:5px;}@media(min-width:768px){.post{max-width:90%;margin:auto;}}@media(min-width:992px){.post{max-width:80%;margin:auto;}}@media(min-width:1200px){.post{max-width:65%;margin:auto;}}</style>
+<center><h5><a href="/index.html">home</a> | <a href="/about.html">about</a></h5></center>
+<hr>
+<div class="post">
+  <h3>why i migrated to google app engine</h3>
+  <h5>mar. 3, 2019</h5>
+  <br>
+  this happened when i purchased mattjack.dev and migrated away from mattwantsto.work.<br>
+  <br>
+  i had originally hosted this site on heroku, the primary reason being that i had a lot of experience with it from hosting my twitter bots. the other major reason was that not very many platforms had robust support for deploying rust applications yet. on heroku, i used a rocket buildpack built by a community member and set my configuration to bind to a port set by an environment variable, and it deployed without a hitch--just a fantastic experience. not only that, but my traffic was well under the limitations for heroku's free tier. you can't beat free hosting!<br>
+  <br>
+  the problem arose when i tried attaching a custom domain: my original domain registrar did not support ALIAS or ANAME dns records. this is a problem because pointing to a root domain _name_ requires one of these records to be used, whereas an _ip address_ can use the universally-supported A record. however, heroku does not provide static ip addresses because they can present availability problems for some kinds of PaaS. the alternative is to use a CNAME record, which requires a subdomain (usually "www"). somewhat embarrassingly, this little issue was the dealbreaker. i want a root domain without any kind of forwarding or redirecting.<br>
+  <br>
+  google app engine solved this problem by providing me with a static ip address. furthermore, .dev domains are included on the http strict transport security (hsts) list, meaning they must be accessed over an ssl/tls-secured connection. with my purchase of a .dev domain, google managed my ssl certificate for me, so i didn't have to handle it manually with let's encrypt.<br>
+  <br>
+  another bonus of google app engine is that apps are deployed from a docker container, meaning once i set it up the first time i can spin it up anywhere. since google allows custom runtimes, i was able to use rust's docker image even though rust is not officially supported by app engine. amazon web services supports custom runtimes as well, but they require you to build the image from hashicorp's packer, and i preferred to get some practice with the more widely adopted docker.<br>
+  <br>
+  google cloud platform's huge suite of features and tools have been really fun to explore, but i don't have much use for them for the time being. i especially like the feature of app engine where you can deploy multiple versions of the same app and split traffic between them by a specific percentage, by cookie, or randomly, allowing you to do some interesting a/b testing and things like that.<br>
+  <br>
+  if you're considering gcp: it can be a headache to get to your first deployment (especially if you're new to the platform), but the learning curve is shallow and after that it's smooth sailing.<br>
+</div>
+<br><hr>
+<center><h5>matt@{this domain} / (0) 2019 no rights reserved</h5></center>

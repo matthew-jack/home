@@ -1,0 +1,49 @@
+<title>🌊 hockey net (part 1)</title>
+<style>body{font-size:0.95rem;font-family:Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace;}h5{margin-top:5px;margin-bottom:5px;}@media(min-width:768px){.post{max-width:90%;margin:auto;}}@media(min-width:992px){.post{max-width:80%;margin:auto;}}@media(min-width:1200px){.post{max-width:65%;margin:auto;}}</style>
+<center><h5><a href="/index.html">home</a> | <a href="/about.html">about</a></h5></center>
+<hr>
+<div class="post">
+  <h3>hockey-net: building a neural network to recognize and track hockey players in real-time (part 1)</h3>
+  <h5>feb. 28, 2019</h5>
+  <h4>part 1: making a plan</h4>
+  i really want to like hockey. i'd say it's one of the most exciting sports because it has the least downtime of the stick & ball sports, *plus* the occasional body check and gloves-off fight.<br>
+  <br>
+  i grew up in chicago so i'm canonically a blackhawks fan. this was easy in <a href="https://en.wikipedia.org/wiki/List_of_Stanley_Cup_champions#NHL_champions_(since_1927)">2010-2015</a> but has gotten more difficult linearly in the years since.<br>
+  <br>
+  during last night's game, however, i realized i really had a problem. i zoned out on my phone, and after 5 minutes had passed i suddenly noticed that the announcers were still barking in my headphones. pretty impressive to forget that you're watching a game while you're watching a game.<br>
+  <br>
+  so let's engineer this.<br>
+  <br>
+  the problem is that i'm getting bored too quickly, and i think the primary cause is that i don't have a personal stake in the game. my anthropology background tells me this is because i've never been initiated into hockey culture, so i haven't formed an attachment to the identity of a "blackhawks fan". a symptom of this is that i don't know much about the blackhawks team and the individual players.<br>
+  <br>
+  the quickest way to get me personally attached to something is to make it a project, and let's make it *complicated*.<br>
+  what complicated project would help get me personally invested in the game, and learn about the hawks in the process?<br>
+  <br>
+  **how about building a neural network to identify and track individual players, and show a profile of them on the screen?**<br>
+  <br>
+  wow, my blood pressure is already in the red zone. this sounds perfect.<br>
+  <br>
+  so this is really just a combination of a few smaller projects: recognizing a "hockey player", identifying who that player is, and then tracking that player as he moves across the ice (and in-and-out of frame). then, it has to fetch some information about that player (maybe his picture, full name, position, and record). finally, it has to be done in real-time using a video source.<br>
+  <br>
+  fetching the player's information is going to come down to making some kind of request to a website that has information about players. we can do that in our sleep! let's do the hard stuff first: those first three projects.<br>
+  <br>
+  to me, a deep-learning-naïve developer, it seems like the best place to start would be breaking a video into frames and getting a model working on still images, then worrying about translating it to video.<br>
+  <br>
+  i'm not sure which of those projects would be easier to implement, but my best guess is the detection one; i have to teach a computer what a hockey player looks like.<br>
+  <br>
+  once the computer can recognize a hockey player i think it will be a lot easier to teach it to follow the same player while he's in frame (nothing you can really do when he goes out of frame). however, this sounds like the point where you need to switch from still to video, so let's do this last.<br>
+  <br>
+  instead, let's teach the computer to tell me who he is. to figure out his team, i bet you could get pretty far just by sampling the color of his jersey. if it's still not clear, we just have to get one good look at the logo of each team, come up with a numerical similarity to a list of team logos we can build into the model, then we can figure out which two teams are playing. finally, for each player that we detect we just ask, "is his jersey closer to color A or color B?"<br>
+  <br>
+  figuring out the player's identity will be a lot harder. my best guess is that we'll have to use the jersey numbers; they're less complicated to interpret than the last name on the back--and <i>definitely</i> easier than their faces--and are also visible in 3 different places (large on the back, smaller on each shoulder). one problem i'm foreseeing, however, is the issue of motion blur. individual frames of a 24-30fps video will probably not be very clean, but we'll worry about this if the time comes.<br>
+  <br>
+  <hr>
+  <br>
+  okay, this sounds pretty coherent. we'll start by teaching a model to recognize a "hockey player". next, we teach it to recognize team logos and jersey numbers. then, we teach it to track players and start moving the whole thing over to video in the process. finally, we pull the player's info down from somewhere. if we run into hiccups along the way we can adapt the order or strategy of this as needed.<br>
+  <br>
+  the playoffs start in april...so let's see if i can get this done before the stanley cup finals. that's over 2 months away.<br>
+  <br>
+  i have a <i>lot</i> of reading to do, so i'll see you in part 2!<br>
+</div>
+<br><hr>
+<center><h5>matt@{this domain} / (0) 2019 no rights reserved</h5></center>
